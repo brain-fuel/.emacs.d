@@ -1,3 +1,7 @@
+* Matt Laine Literate Emacs Config
+
+** Startup Screen + Geometry
+
 This makes the startup screen and general geometry not look like total crap
 
 #+begin_src emacs-lisp
@@ -12,8 +16,10 @@ This makes the startup screen and general geometry not look like total crap
    (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
 #+end_src
 
-Font + theme.
+** Font + theme.
+
 I prefer Monoid font over the other stuff, but you have to have installed it first. You can find it at https://github.com/larsenwork/monoid
+
 Wombat theme is available as a default theme with Emacs.
 
 #+begin_src emacs-lisp
@@ -26,7 +32,7 @@ Wombat theme is available as a default theme with Emacs.
 
 #+end_src
 
-Package initialization
+** Package initialization
 
 #+begin_src emacs-lisp  
   (require 'package)
@@ -47,6 +53,8 @@ Package initialization
   (setq use-package-always-ensure t)
 
 #+end_src
+
+** Packages
 
 #+begin_src emacs-lisp
   (use-package doom-modeline
