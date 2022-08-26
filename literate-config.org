@@ -11,7 +11,6 @@ This makes the startup screen and general geometry not look like total crap
   (tool-bar-mode -1)                       ; Disable the toolbar
   (tooltip-mode -1)                        ; Disable tooltips
   (set-fringe-mode 10)                     ; Give some "breathing room"
-  (global-display-line-numbers-mode)       ; Display line numbers everywhere
   (global-set-key
    (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
 #+end_src
@@ -80,3 +79,14 @@ Wombat theme is available as a default theme with Emacs.
     :config
     (ivy-mode 1))
  #+end_src
+
+* Line Numbering
+
+Display line numbers everywhere except term-mode and eshell-mode
+
+#+begin_src emacs-lisp
+      (global-display-line-numbers-mode)
+      (dolist (mode '(term-mode-hook
+		      eshell-mode-hook))
+	(add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
