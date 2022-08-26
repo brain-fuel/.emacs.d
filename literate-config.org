@@ -85,8 +85,9 @@ Wombat theme is available as a default theme with Emacs.
 Display line numbers everywhere except term-mode and eshell-mode
 
 #+begin_src emacs-lisp
-      (global-display-line-numbers-mode)
-      (dolist (mode '(term-mode-hook
-		      eshell-mode-hook))
-	(add-hook mode (lambda () (display-line-numbers-mode 0))))
+	(global-display-line-numbers-mode)
+	(dolist (mode '(term-mode-hook
+			eshell-mode-hook
+			shell-mode-hook))
+	  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
