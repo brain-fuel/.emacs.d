@@ -8,9 +8,6 @@
 (global-set-key
  (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
 
-;; First, you need to have installed Monoid font
-;; https://github.com/larsenwork/monoid
-
 (set-face-attribute
  'default nil
  :font "Monoid"
@@ -18,7 +15,6 @@
 
 (load-theme 'wombat)
 
-;; Initialize package sources
 (require 'package)
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
@@ -58,21 +54,3 @@
 	 ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
-
-
-;; ;; ;; CUSTOM SET VARIABLES    ;; ;; ;;
-;; ;; ;; ALL THE STUFF BELOW IS  ;; ;; ;;
-;; ;; ;; AUTOMATICALLY INSTALLED ;; ;; ;;
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(ivy command-log-mode use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
