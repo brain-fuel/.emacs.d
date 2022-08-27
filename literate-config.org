@@ -72,6 +72,12 @@ For me, this is necessary. I can neither stand nor remember vanilla Emacs bindin
 
 *** TODO Magit
 
+#+begin_src emacs-lisp
+
+  (use-package magit)
+  
+#+end_src
+
 *** Ivy
 
 #+begin_src emacs-lisp
