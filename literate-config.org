@@ -22,6 +22,7 @@ I prefer Monoid font over the other stuff, but you have to have installed it fir
 Wombat theme is available as a default theme with Emacs.
 
 #+begin_src emacs-lisp
+  
   (set-face-attribute
    'default nil
    :font "Monoid"
@@ -33,7 +34,8 @@ Wombat theme is available as a default theme with Emacs.
 
 ** Package initialization
 
-#+begin_src emacs-lisp  
+#+begin_src emacs-lisp
+  
   (require 'package)
   (setq package-archives
 	'(("melpa" . "https://melpa.org/packages/")
@@ -56,10 +58,7 @@ Wombat theme is available as a default theme with Emacs.
 ** Packages
 
 #+begin_src emacs-lisp
-  (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode 1))
-
+  
   (use-package command-log-mode)
 
   (use-package ivy
@@ -78,16 +77,19 @@ Wombat theme is available as a default theme with Emacs.
 	   ("C-d" . ivy-reverse-i-search-kill))
     :config
     (ivy-mode 1))
- #+end_src
 
-* Line Numbering
+#+end_src
+
+** Line Numbering
 
 Display line numbers everywhere except term-mode and eshell-mode
 
 #+begin_src emacs-lisp
-	(global-display-line-numbers-mode)
-	(dolist (mode '(term-mode-hook
-			eshell-mode-hook
-			shell-mode-hook))
-	  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+  (global-display-line-numbers-mode)
+  (dolist (mode '(term-mode-hook
+		  eshell-mode-hook
+		  shell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  
 #+end_src
