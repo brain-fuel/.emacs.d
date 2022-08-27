@@ -2,8 +2,7 @@
 
 ** Startup Screen + Geometry
 
-This makes the startup screen and general geometry not look like total crap
-
+This makes the startup screen and general geometry not look like total crap, and for <ESC> to quit prompts in addition to C-g
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)
 
