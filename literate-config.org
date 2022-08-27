@@ -11,7 +11,6 @@ This makes the startup screen and general geometry not look like total crap, and
   (scroll-bar-mode -1)                     ; Disable visible scroll bar
   (tool-bar-mode -1)                       ; Disable the toolbar
   (tooltip-mode -1)                        ; Disable tooltips
-  (set-fringe-mode 10)                     ; Give some "breathing room"
   (global-set-key
    (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
   
@@ -59,9 +58,23 @@ Wombat theme is available as a default theme with Emacs.
 
 ** Packages
 
+*** Evil Mode
+
+For me, this is necessary. I can neither stand nor remember vanilla Emacs bindings. This is the first package I install, because without it I'm dingdonging around like a doofus.
+
 #+begin_src emacs-lisp
+
+  (use-package evil
+    :config
+    (evil-mode 1))
   
-  (use-package command-log-mode)
+#+end_src
+
+*** TODO Magit
+
+*** Ivy
+
+#+begin_src emacs-lisp
 
   (use-package ivy
     :bind (; TODO Install Swiper ("C-s" . swiper)
@@ -79,6 +92,25 @@ Wombat theme is available as a default theme with Emacs.
 	   ("C-d" . ivy-reverse-i-search-kill))
     :config
     (ivy-mode 1))
+
+#+end_src
+
+*** Command Log Mode
+
+#+begin_src emacs-lisp
+
+  (use-package command-log-mode)
+
+#+end_src
+
+*** Prettification
+
+**** Rainbow delimiters
+
+#+begin_src emacs-lisp
+
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
 
 #+end_src
 
