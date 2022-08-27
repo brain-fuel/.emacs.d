@@ -5,6 +5,7 @@
 This makes the startup screen and general geometry not look like total crap, and <ESC> to quit prompts in addition to C-g
 
 #+begin_src emacs-lisp
+
   (setq inhibit-startup-message t)
 
   (scroll-bar-mode -1)                     ; Disable visible scroll bar
@@ -13,6 +14,7 @@ This makes the startup screen and general geometry not look like total crap, and
   (set-fringe-mode 10)                     ; Give some "breathing room"
   (global-set-key
    (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
+  
 #+end_src
 
 ** Font + theme.
