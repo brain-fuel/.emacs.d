@@ -70,7 +70,7 @@ For me, this is necessary. I can neither stand nor remember vanilla Emacs bindin
   
 #+end_src
 
-*** TODO Magit
+*** Magit
 
 #+begin_src emacs-lisp
 
