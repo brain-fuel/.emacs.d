@@ -109,6 +109,17 @@ For me, this is necessary. I can neither stand nor remember vanilla Emacs bindin
 
 #+end_src
 
+*** Projectile
+
+#+begin_src emacs-lisp
+
+  (use-package projectile
+    :config (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+#+end_src
+
 *** Prettification
 
 **** Rainbow delimiters
