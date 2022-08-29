@@ -65,12 +65,16 @@ For me, this is necessary. I can neither stand nor remember vanilla Emacs bindin
 #+begin_src emacs-lisp
 
   (use-package evil
+    :init
+    (setq evil-want-fine-undo t)
     :config
     (evil-mode 1))
-  
+
 #+end_src
 
 *** Magit
+
+Only interface with Git better than the command line.
 
 #+begin_src emacs-lisp
 
@@ -78,26 +82,73 @@ For me, this is necessary. I can neither stand nor remember vanilla Emacs bindin
   
 #+end_src
 
-*** Ivy
+*** LSP-Mode
+
 
 #+begin_src emacs-lisp
 
-  (use-package ivy
-    :bind (; TODO Install Swiper ("C-s" . swiper)
-	   :map ivy-minibuffer-map
-	   ("TAB" . ivy-alt-done)
-	   ("C-l" . ivy-alt-done)
-	   ("C-j" . ivy-alt-done)
-	   ("C-k" . ivy-previous-line)
-	   :map ivy-switch-buffer-map
-	   ("C-k" . ivy-previous-line)
-	   ("C-l" . ivy-done)
-	   ("C-d" . ivy-switch-buffer-kill)
-	   :map ivy-reverse-i-search-map
-	   ("C-k" . ivy-previous-line)
-	   ("C-d" . ivy-reverse-i-search-kill))
+  (use-package lsp-mode)
+
+#+end_src
+
+*** Swiper
+
+Fuzzy searching.
+
+#+begin_src emacs-lisp
+
+  (use-package swiper)
+
+#+end_src
+
+*** Ivy
+
+Interactive interface for completion in Emacs.
+
+#+begin_src emacs-lisp
+
+    (use-package ivy
+      :bind (("C-s" . swiper)
+	     :map ivy-minibuffer-map
+	     ("TAB" . ivy-alt-done)
+	     ("C-l" . ivy-alt-done)
+	     ("C-j" . ivy-alt-done)
+	     ("C-k" . ivy-previous-line)
+	     :map ivy-switch-buffer-map
+	     ("C-k" . ivy-previous-line)
+	     ("C-l" . ivy-done)
+	     ("C-d" . ivy-switch-buffer-kill)
+	     :map ivy-reverse-i-search-map
+	     ("C-k" . ivy-previous-line)
+	     ("C-d" . ivy-reverse-i-search-kill))
+      :config
+      (ivy-mode 1))
+
+#+end_src
+
+*** Company (COMPlete ANYthing) Mode
+
+#+begin_src emacs-lisp
+
+  (use-package company)
+
+#+end_src
+
+*** Yankpad & YaSnippet
+
+#+begin_src emacs-lisp
+
+  (use-package yankpad
+    :ensure t
+    :defer 10
+    :init
+    (setq yankpad-file "~/.emacs.d/yankpad.org")
     :config
-    (ivy-mode 1))
+    (add-to-list 'company-backends #'company-yankpad))
+
+  (use-package yasnippet
+    :init
+    (yas-global-mode 1))
 
 #+end_src
 
@@ -117,6 +168,63 @@ For me, this is necessary. I can neither stand nor remember vanilla Emacs bindin
     :config (projectile-mode +1))
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+#+end_src
+
+*** Languages
+
+**** Elixir
+
+***** Use-Package with fun ligature / symbols for different combinators
+
+#+begin_src emacs-lisp
+
+  (use-package elixir-mode
+    :ensure t
+    :init
+    (add-hook 'elixir-mode-hook
+	      (lambda ()
+                (push '(">=" . ?\u2265) prettify-symbols-alist)
+                (push '("<=" . ?\u2264) prettify-symbols-alist)
+                (push '("!=" . ?\u2260) prettify-symbols-alist)
+                (push '("==" . ?\u2A75) prettify-symbols-alist)
+                (push '("=~" . ?\u2245) prettify-symbols-alist)
+                (push '("<-" . ?\u2190) prettify-symbols-alist)
+                (push '("->" . ?\u2192) prettify-symbols-alist)
+                (push '("<-" . ?\u2190) prettify-symbols-alist)
+                (push '("|>" . ?\u25B7) prettify-symbols-alist))))
+
+#+end_src
+
+***** Reformatting
+
+
+#+begin_src emacs-lisp
+
+ (use-package reformatter
+    :ensure t
+    :config
+    (reformatter-define +elixir-format
+      :program "mix"
+      :args '("format" "-"))
+    (defun +set-default-directory-to-mix-project-root (original-fun &rest args)
+      (if-let* ((mix-project-root (and buffer-file-name
+                                       (locate-dominating-file buffer-file-name
+                                                               ".formatter.exs"))))
+          (let ((default-directory mix-project-root))
+            (apply original-fun args))
+        (apply original-fun args)))
+    (advice-add '+elixir-format-region :around #'+set-default-directory-to-mix-project-root)
+    (add-hook 'elixir-mode-hook #'+elixir-format-on-save-mode)) 
+
+#+end_src
+
+***** LSP
+
+
+#+begin_src emacs-lisp
+
+  (setq lsp-clients-elixir-server-executable "~/Projects/elixir-ls/release/erl25/language_server.sh")
 
 #+end_src
 
